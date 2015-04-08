@@ -309,6 +309,7 @@ class Client
             throw new RuntimeException('Access denied');
         }
 
+        $this->patchResponseBeforeDecoding($http_body);
         $response = json_decode($http_body, true);
 
         if ($this->debug) {
@@ -319,5 +320,15 @@ class Client
         curl_close($ch);
 
         return is_array($response) ? $response : array();
+    }
+
+    /**
+     * Patches response before decodeing from JSON.
+     *
+     * @param  string &$response  JSON response
+     * @return void
+     */
+    protected function patchResponseBeforeDecoding(&$response)
+    {
     }
 }
